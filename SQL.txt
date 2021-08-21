@@ -1,0 +1,130 @@
+insert into table values(col1, col2, ... );
+insert into table(col2, col1,..) values(col2, col1, ..);
+// inserting data from other table
+insert into table1(col1, col2,...) select col1, col2 from table2;
+// inserting using where 
+insert into table2(select * from table1 where age = 22);
+
+** SELECT
+
+select * from table;
+select col2*5 as xyz from table where col1 = 222;
+select x, y from table1, table2;
+
+** INSERT ALL
+
+// inserting multiple rows
+
+INSERT ALL
+INTO table(col1, col2, col3, ..) Values(exp1, exp2, ....)      // Insert table Values(exp1, exp2, ...)
+INTO table(col1, col2, col3, ..) Values(exp1, exp2, ....)
+
+// inserting multiple rows into multiple tables
+
+INSERT ALL
+INTO table(col1, col2, col3, ..) Values(exp1, exp2, ....)
+INTO table1(col1, col2,.....) Values(ex1, ex2, ... ) // can be of different schema
+INTO table(col1, col2, col3, ..) Values(exp1, exp2, ....)
+
+** UPDATE
+
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition; // if not present all rows will be updated.
+
+// getting data from another table and updating
+ex:
+update emp
+set job = (select dname from dept where rownum = 1);
+
+** BETWEEN
+
+SELECT * from emp WHERE sal BETWEEN 2000 and 3000; // both 2000 and 3000 will be included. //  **lower followed by higher value
+
+// same as sal >= 2000 AND sal <= 3000
+
+// for DATE
+
+ex:
+
+SELECT * FROM EMP WHERE HIREDATE BETWEEN TO_DATE('1981/04/02', 'yyyy/mm/dd') // can be any format
+AND TO_DATE('1981/06/09', 'yyyy/mm/dd');
+
+** NOT BETWEEN
+
+select * from emp where sal not between 2000 and 3000;
+
+** DELETE BETWEEN
+
+DELETE FROM EMP
+WHERE sal NOT BETWEEN 1000 AND 3000;
+
+
+** DELETE (only data gets deleted)
+
+DELETE FROM TableName
+WHERE condition; // if not specified all rows will be deleted.
+
+** TRUNCATE 
+
+TRUNCATE FROM TableName;
+
+*** TRUNCATE VS DELETE
+
+-> roll back can be done when we use delete. when we use truncate data can't be rolled back.
+-> we can delete some rows using delete but in truncate all rows will be deleted.
+ 
+** ALTER(ADD, DROP) (column level)
+
+// ADD
+
+// adding columns
+
+ALTER TABLE table_name ADD(column_name datatype, col2 datatype2, .....);
+
+ex:
+ALTER TABLE EMP ADD(ADDRESS VARCHAR2(15));
+
+// adding constraints
+
+ALTER TABLE EMP
+ADD PRIMARY KEY(EMPNO);
+
+// default
+ex:
+ALTER TABLE EMP
+ADD (gender CHAR(1) DEFAULT 'F');
+
+// DROP
+
+ALTER TABLE table_name DROP(col1, col2, ....);
+
+// drop constraints
+
+ALTER TABLE EMP DROP CONTRAINT PRIMARY_ID; // primary_id is name given for primary key while creating table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
