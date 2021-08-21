@@ -103,16 +103,74 @@ ALTER TABLE table_name DROP(col1, col2, ....);
 
 ALTER TABLE EMP DROP CONTRAINT PRIMARY_ID; // primary_id is name given for primary key while creating table.
 
+** ALTER MODIFY
+
+--> we can change the data type of the existing column or the size of the data type of the existing column.
+
+ALTER TABLE table_name MODIFY(column_name datatype);
+
+ex:
+
+ALTER TABLE EMP MODIFY(gender VARCHAR(2), COMM INT);
+
+** ALTER RENAME
+
+--> only single column can be renamed at a time.
+
+ALTER TABLE table_name RENAME COLUMN x TO y;
 
 
+*** LIKE
+
+--> pattern matching
+
+% --> 0 or any number of characters
+_ --> any character
+
+ex:
+
+SELECT ename FROM emp WHERE ename LIKE '%M'; // ending with M
+
+SELECT ename FROM emp WHERE ename NOT LIKE '%L%'; // no L allowed
 
 
+** CREATE
+
+CREATE TABLE table_name
+(
+	column1 datatype(size),
+	column2 datatype(size),
+	......
+	columnN datatype(size),
+	PRIMARY KEY(one or more columns)
+);
+
+** DESC table_name; --> for table details
+
+// creating a new table from an existing table
+
+CREATE table emp1 as (select * from emp);
 
 
+** DISTINCT
 
+SELECT DISTINCT column1, column 2,.... FROM table_name; (if many columns given then they check for combined distinct)
 
+// count ex:
 
+SELECT job, count(*) FROM emp GROUP BY job having count(*) > 1;
 
+** IN // in order to reduce many ORs we use IN
+
+ex:
+
+SELECT * FROM EMP WHERE ename IN('xyz', 'abd', 'std');
+
+// we can also use NOT IN
+
+// second highest salary
+
+ex: SELECT sal FROM emp WHERE sal NOT IN(SELECT MAX(sal) FROM emp);
 
 
 
