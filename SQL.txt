@@ -172,13 +172,38 @@ SELECT * FROM EMP WHERE ename IN('xyz', 'abd', 'std');
 
 ex: SELECT sal FROM emp WHERE sal NOT IN(SELECT MAX(sal) FROM emp);
 
+** Aggregate Functions
 
+--> MAX
+--> MIN
+--> COUNT --> if we want to include nulls in count then COUNT(*)
+--> AVG
+--> SUM
 
+--> GROUP BY
 
+group rows according to one or more attribute
 
+Q. Find maximum marks in every subject.
 
+SELECT subject, MAX(marks) FROM student GROUP BY subject;
 
+--> HAVING
 
+Q. Find sum of marks of the students having sum more than 150.
+
+SELECT name, SUM(marks) AS msum FROM student GROUP BY name HAVING SUM(marks) > 150; 
+
+--> ORDER BY
+
+select * from table_name order by column_name; --> column can be string or date or number
+
+--> we can also use more than one column --> table is sorted by first column then for all the same first column value it will be sorted by 2nd column etc
+
+select * from emp order by deptno, sal;
+
+--> we can also use column number instead of column names in order by. (1 based)
+select * from emp order by 1, 2; --> 1st and 2nd column.
 
 
 
